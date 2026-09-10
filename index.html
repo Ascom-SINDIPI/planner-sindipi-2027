@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Planner SINDIPI 2027</title>
+<meta name="description" content="Calendário de conteúdo 2027 do SINDIPI: datas comemorativas, feriados, aniversários da base e períodos de defeso e safra.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎣</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+  :root{
+    --sand-50:#faf7ef; --sand-100:#f1e9d6; --sand-200:#e5dabc; --line:#ddd0ac;
+    --ink-900:#132a33; --ink-700:#25454f; --ink-500:#4c6b73; --ink-400:#6f8990;
+    --sea-700:#0f5c73; --sea-600:#137389; --sea-500:#1f8a9e; --sea-100:#dcedef;
+    --coral-600:#c1552d; --coral-100:#f6e2d4;
+    --gold-600:#a97c1f; --gold-100:#f3e7c8;
+    --indigo-600:#5b4b9e; --indigo-100:#e8e3f5;
+    --holiday:#a13324; --holiday-100:#f7e0da;
+    --card-bg:#ffffff; --scrim:rgba(19,42,51,.45);
+    --shadow:0 1px 2px rgba(19,42,51,.06), 0 8px 24px -12px rgba(19,42,51,.18);
+    --shadow-lg:0 20px 60px -12px rgba(19,42,51,.35);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --sand-50:#0e2129; --sand-100:#132b34; --sand-200:#1c3a44; --line:#2b4b55;
+      --ink-900:#f3ecd9; --ink-700:#d8cfb4; --ink-500:#a9bcc1; --ink-400:#8ba1a8;
+      --sea-700:#7fd0dc; --sea-600:#5cc0cf; --sea-500:#49b3c4; --sea-100:#173b45;
+      --coral-600:#e9895e; --coral-100:#3a2416;
+      --gold-600:#e0b84f; --gold-100:#332a11;
+      --indigo-600:#b6a6ea; --indigo-100:#2a2140;
+      --holiday:#f18271; --holiday-100:#3a1912;
+      --card-bg:#132b34; --scrim:rgba(4,12,16,.65);
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+      --shadow-lg:0 20px 60px -12px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --sand-50:#0e2129; --sand-100:#132b34; --sand-200:#1c3a44; --line:#2b4b55;
+    --ink-900:#f3ecd9; --ink-700:#d8cfb4; --ink-500:#a9bcc1; --ink-400:#8ba1a8;
+    --sea-700:#7fd0dc; --sea-600:#5cc0cf; --sea-500:#49b3c4; --sea-100:#173b45;
+    --coral-600:#e9895e; --coral-100:#3a2416;
+    --gold-600:#e0b84f; --gold-100:#332a11;
+    --indigo-600:#b6a6ea; --indigo-100:#2a2140;
+    --holiday:#f18271; --holiday-100:#3a1912;
+    --card-bg:#132b34; --scrim:rgba(4,12,16,.65);
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    --shadow-lg:0 20px 60px -12px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--sand-50); color:var(--ink-900); font-family:'Work Sans',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3{ font-family:'Fraunces',Georgia,serif; text-wrap:balance; }
+  a{ color:inherit; }
+  button{ font-family:inherit; }
+  img{ max-width:100%; }
+  .app{ display:flex; min-height:100vh; max-width:1280px; margin:0 auto; }
+
+  .sidebar{ flex:0 0 220px; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:28px 18px 28px 24px; border-right:1px solid var(--line); scrollbar-width:thin; }
+  .brand{ font-family:'Fraunces',serif; font-weight:600; font-size:1.05rem; line-height:1.25; color:var(--sea-700); margin:0 0 2px; }
+  .brand small{ display:block; font-family:'Work Sans',sans-serif; font-weight:600; font-size:.68rem; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-400); margin-top:4px; }
+  .side-year{ font-family:'Fraunces',serif; font-size:2.6rem; font-weight:600; color:var(--ink-900); line-height:1; margin:14px 0 20px; }
+  nav.month-index{ display:flex; flex-direction:column; gap:2px; border-top:1px solid var(--line); padding-top:14px; }
+  nav.month-index a{ display:flex; align-items:baseline; gap:8px; text-decoration:none; padding:6px 8px; border-radius:7px; font-size:.86rem; font-weight:500; color:var(--ink-500); transition:background .15s,color .15s; }
+  nav.month-index a .num{ font-family:'Fraunces',serif; font-variant-numeric:tabular-nums; font-size:.78rem; color:var(--ink-400); width:1.1em; }
+  nav.month-index a:hover{ background:var(--sand-100); color:var(--ink-900); }
+  nav.month-index a.active{ background:var(--sea-100); color:var(--sea-700); font-weight:700; }
+  nav.month-index a.active .num{ color:var(--sea-600); }
+  .side-legend{ margin-top:26px; padding-top:16px; border-top:1px solid var(--line); font-size:.74rem; color:var(--ink-500); display:flex; flex-direction:column; gap:7px; }
+  .side-legend .row{ display:flex; align-items:center; gap:7px; }
+  .dot{ width:7px; height:7px; border-radius:50%; flex:none; display:inline-block; }
+  .dot.feriado{ background:var(--holiday); } .dot.comemorativa{ background:var(--gold-600); }
+  .dot.defeso{ background:var(--coral-600); } .dot.safra{ background:var(--sea-600); }
+  .dot.institucional{ background:var(--indigo-600); }
+  .side-hint{ margin-top:14px; font-size:.72rem; line-height:1.5; color:var(--ink-400); }
+  .mobile-nav{ display:none; }
+
+  .content{ flex:1; min-width:0; padding:0 0 60px; }
+  .hero{ padding:44px 40px 30px; border-bottom:1px solid var(--line); }
+  .eyebrow{ font-size:.72rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--sea-600); margin:0 0 10px; }
+  .hero h1{ font-size:clamp(1.7rem,3.6vw,2.4rem); font-weight:600; line-height:1.08; margin:0 0 12px; color:var(--ink-900); }
+  .hero p{ max-width:66ch; color:var(--ink-500); font-size:.95rem; line-height:1.55; margin:0; }
+
+  section.month{ padding:40px 40px 8px; border-bottom:1px solid var(--line); scroll-margin-top:14px; }
+  section.month:last-of-type{ border-bottom:none; padding-bottom:40px; }
+  .month-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:16px; flex-wrap:wrap; }
+  .month-num{ font-family:'Fraunces',serif; font-weight:400; font-size:1.05rem; color:var(--ink-400); }
+  .month-head h2{ font-size:clamp(1.55rem,3vw,2.05rem); font-weight:600; margin:0; color:var(--sea-700); }
+  .month-head .yr{ font-family:'Fraunces',serif; font-size:1.05rem; color:var(--ink-400); }
+
+  .month-body{ display:grid; grid-template-columns: minmax(0,1fr) 250px; gap:26px; align-items:start; }
+
+  table.cal{ width:100%; border-collapse:collapse; table-layout:fixed; }
+  table.cal th{ font-size:.7rem; font-weight:700; letter-spacing:.04em; color:var(--ink-400); padding:6px 0 8px; text-align:center; }
+  table.cal th.sun{ color:var(--holiday); }
+  table.cal td{ text-align:center; vertical-align:top; padding:2px; height:0; border:none; }
+  table.cal td.empty .daycell{ visibility:hidden; }
+  .daycell{
+    width:100%; min-height:82px; border-radius:10px; border:1px solid transparent; padding:6px 6px 6px;
+    display:flex; flex-direction:column; align-items:flex-start; gap:4px; cursor:pointer; text-align:left;
+    background:transparent; transition:background .12s, border-color .12s;
+  }
+  .daycell:hover{ background:var(--sand-100); border-color:var(--line); }
+  .daycell:focus-visible{ outline:2px solid var(--sea-500); outline-offset:1px; }
+  .daycell .n{ font-variant-numeric:tabular-nums; font-weight:700; font-size:.82rem; color:var(--ink-700); align-self:flex-start; }
+  .daycell.holiday .n{ color:var(--holiday); }
+  .daycell .titles{ display:flex; flex-direction:column; gap:2px; width:100%; flex:1; }
+  .title-chip{
+    display:block; width:100%; font-size:.64rem; line-height:1.3; font-weight:700;
+    padding:2px 5px; border-radius:5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .title-chip.cat-feriado{ background:var(--holiday-100); color:var(--holiday); }
+  .title-chip.cat-comemorativa{ background:var(--gold-100); color:var(--gold-600); }
+  .title-chip.cat-defeso{ background:var(--coral-100); color:var(--coral-600); }
+  .title-chip.cat-safra{ background:var(--sea-100); color:var(--sea-700); }
+  .title-chip.cat-institucional{ background:var(--indigo-100); color:var(--indigo-600); }
+  .more-chip{ font-size:.62rem; font-weight:700; color:var(--ink-400); padding:0 2px; }
+  .title-slot-empty{ width:100%; flex:1; min-height:16px; border-bottom:1px dashed var(--line); opacity:.4; margin-top:2px; }
+
+  .cal-legend{ display:flex; flex-wrap:wrap; gap:12px; margin:12px 2px 0; font-size:.7rem; color:var(--ink-500); }
+  .cal-legend .row{ display:flex; align-items:center; gap:6px; }
+  .sq-holiday{ width:9px; height:9px; border-radius:2px; background:var(--holiday); flex:none; display:inline-block; }
+
+  .side-panel{ display:flex; flex-direction:column; gap:18px; padding-top:2px; }
+  .panel-block h3{ margin:0 0 9px; font-size:.68rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-400); }
+  ul.plain{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:7px; }
+  ul.plain li{ font-size:.83rem; line-height:1.4; color:var(--ink-700); display:flex; gap:8px; }
+  ul.plain li .d{ font-variant-numeric:tabular-nums; font-weight:700; color:var(--ink-900); flex:none; width:2.1ch; }
+  ul.plain li.is-holiday .d, ul.plain li.is-holiday .t{ color:var(--holiday); }
+  ul.plain li.empty-note{ color:var(--ink-400); font-style:italic; }
+
+  #overlay{ position:fixed; inset:0; background:var(--scrim); display:flex; align-items:center; justify-content:center; padding:20px; z-index:50; }
+  #overlay[hidden]{ display:none; }
+  #modal{ width:min(520px,100%); max-height:min(84vh,680px); overflow-y:auto; background:var(--card-bg); border-radius:16px; box-shadow:var(--shadow-lg); padding:24px 24px 22px; }
+  .modal-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:6px; }
+  .modal-date{ font-family:'Fraunces',serif; font-size:1.3rem; font-weight:600; color:var(--ink-900); text-transform:capitalize; }
+  .modal-sub{ font-size:.78rem; color:var(--ink-400); margin:2px 0 0; }
+  .modal-close{ all:unset; cursor:pointer; width:30px; height:30px; border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--ink-400); font-size:1.1rem; flex:none; }
+  .modal-close:hover{ background:var(--sand-100); color:var(--ink-900); }
+  #modalEvents{ display:flex; flex-direction:column; gap:14px; margin-top:16px; }
+  .event-card{ border:1px solid var(--line); border-radius:12px; padding:14px 16px; background:var(--sand-50); }
+  .badge{ display:inline-block; font-size:.66rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:3px 9px; border-radius:20px; margin-bottom:8px; }
+  .badge.cat-feriado{ background:var(--holiday-100); color:var(--holiday); }
+  .badge.cat-comemorativa{ background:var(--gold-100); color:var(--gold-600); }
+  .badge.cat-defeso{ background:var(--coral-100); color:var(--coral-600); }
+  .badge.cat-safra{ background:var(--sea-100); color:var(--sea-700); }
+  .badge.cat-institucional{ background:var(--indigo-100); color:var(--indigo-600); }
+  .event-card h4{ margin:0 0 6px; font-size:1rem; font-weight:700; color:var(--ink-900); }
+  .event-card p{ margin:0; font-size:.87rem; line-height:1.5; color:var(--ink-700); }
+  .event-card .note{ margin-top:8px; font-size:.78rem; color:var(--ink-400); font-style:italic; }
+  .empty-day{ text-align:center; color:var(--ink-400); font-size:.86rem; padding:18px 4px 4px; }
+
+  @media (max-width:980px){
+    .month-body{ grid-template-columns:1fr; }
+    .side-panel{ flex-direction:row; flex-wrap:wrap; gap:26px; padding-top:14px; border-top:1px solid var(--line); margin-top:16px; }
+    .panel-block{ flex:1 1 220px; }
+  }
+  @media (max-width:760px){
+    .app{ flex-direction:column; }
+    .sidebar{ display:none; }
+    .mobile-nav{ display:flex; gap:6px; overflow-x:auto; position:sticky; top:0; z-index:5; background:var(--sand-50); border-bottom:1px solid var(--line); padding:10px 14px; }
+    .mobile-nav a{ flex:none; font-size:.78rem; font-weight:600; padding:6px 12px; border-radius:20px; background:var(--sand-100); color:var(--ink-700); text-decoration:none; white-space:nowrap; }
+    .mobile-nav a.active{ background:var(--sea-700); color:var(--sand-50); }
+    .hero, section.month{ padding-left:18px; padding-right:18px; }
+    .hero{ padding-top:26px; }
+    .daycell{ min-height:64px; padding:5px 4px 4px; border-radius:8px; }
+    .daycell .n{ font-size:.75rem; }
+    .title-chip{ font-size:.6rem; }
+  }
+  @media (max-width:420px){
+    .daycell{ min-height:56px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar">
+    <p class="brand">SINDIPI<small>Planner de redes sociais</small></p>
+    <div class="side-year">2027</div>
+    <nav class="month-index" id="monthIndex">
+      <a href="#jan"><span class="num">01</span>Janeiro</a>
+      <a href="#fev"><span class="num">02</span>Fevereiro</a>
+      <a href="#mar"><span class="num">03</span>Março</a>
+      <a href="#abr"><span class="num">04</span>Abril</a>
+      <a href="#mai"><span class="num">05</span>Maio</a>
+      <a href="#jun"><span class="num">06</span>Junho</a>
+      <a href="#jul"><span class="num">07</span>Julho</a>
+      <a href="#ago"><span class="num">08</span>Agosto</a>
+      <a href="#set"><span class="num">09</span>Setembro</a>
+      <a href="#out"><span class="num">10</span>Outubro</a>
+      <a href="#nov"><span class="num">11</span>Novembro</a>
+      <a href="#dez"><span class="num">12</span>Dezembro</a>
+    </nav>
+    <div class="side-legend">
+      <div class="row"><span class="sq-holiday" style="border-radius:50%"></span> Domingo / feriado</div>
+      <div class="row"><span class="dot comemorativa"></span> Comemorativa</div>
+      <div class="row"><span class="dot defeso"></span> Defeso / paralisação</div>
+      <div class="row"><span class="dot safra"></span> Safra / retomada</div>
+      <div class="row"><span class="dot institucional"></span> Institucional</div>
+    </div>
+    <p class="side-hint">Clique em qualquer dia marcado para ver a sugestão de conteúdo completa.</p>
+  </aside>
+
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="#jan">Jan</a><a href="#fev">Fev</a><a href="#mar">Mar</a><a href="#abr">Abr</a>
+    <a href="#mai">Mai</a><a href="#jun">Jun</a><a href="#jul">Jul</a><a href="#ago">Ago</a>
+    <a href="#set">Set</a><a href="#out">Out</a><a href="#nov">Nov</a><a href="#dez">Dez</a>
+  </nav>
+
+  <main class="content">
+    <header class="hero">
+      <p class="eyebrow">Calendário editorial · Ano 2027</p>
+      <h1>Planner de publicações do SINDIPI</h1>
+      <p>Datas comemorativas, feriados, aniversários da base e períodos de defeso, adaptados para os dias da semana
+      de 2027. Clique em qualquer dia marcado para ver a sugestão de conteúdo completa. Versão pública de consulta —
+      somente leitura.</p>
+    </header>
+    <div id="months"></div>
+  </main>
+</div>
+
+<div id="overlay" hidden>
+  <div id="modal" role="dialog" aria-modal="true">
+    <div class="modal-head">
+      <div>
+        <div class="modal-date" id="modalDate"></div>
+        <p class="modal-sub" id="modalSub"></p>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="Fechar">✕</button>
+    </div>
+    <div id="modalEvents"></div>
+  </div>
+</div>
+
+<script>
+const CATEGORY_LABELS = {
+  feriado:'Feriado', comemorativa:'Comemorativa', defeso:'Defeso', safra:'Safra', institucional:'Institucional', outro:'Outro'
+};
+const POSTS = [
+  {"id":"2027-01-01","date":"2027-01-01","title":"Confraternização Mundial","category":"feriado","suggestion":"Card de feriado — Feliz Ano Novo, sem expediente.","notes":""},
+  {"id":"2027-01-26","date":"2027-01-26","title":"Fechamento do defeso do camarão (começa 28/01)","category":"defeso","suggestion":"Aviso: o defeso do camarão começa dia 28/01 — reforce a data para a frota se preparar.","notes":"Camarão-rosa, sete-barbas, branco, santana, vermelho e barba-ruça. Defeso vai até 30/04."},
+  {"id":"2027-02-09","date":"2027-02-09","title":"Carnaval","category":"feriado","suggestion":"Comunicado de recesso de Carnaval.","notes":""},
+  {"id":"2027-02-10","date":"2027-02-10","title":"Quarta-feira de Cinzas","category":"comemorativa","suggestion":"Opcional — mensagem de encerramento do Carnaval.","notes":""},
+  {"id":"2027-02-25","date":"2027-02-25","title":"Fim do defeso da sardinha-verdadeira (Cerco)","category":"defeso","suggestion":"Anuncie o fim do defeso — a safra reabre em 1º de março.","notes":"Defeso em vigor desde 01/10/2026."},
+  {"id":"2027-03-01","date":"2027-03-01","title":"Início da safra da sardinha-verdadeira (Cerco)","category":"safra","suggestion":"Começou a safra da sardinha-verdadeira (cerco)!","notes":""},
+  {"id":"2027-03-08","date":"2027-03-08","title":"Dia Internacional da Mulher","category":"comemorativa","suggestion":"Post ou story homenageando as mulheres da pesca e da comunidade pesqueira.","notes":""},
+  {"id":"2027-03-15","date":"2027-03-15","title":"Aniversário de Bombinhas","category":"comemorativa","suggestion":"Post de parabéns ao município de Bombinhas.","notes":""},
+  {"id":"2027-03-20","date":"2027-03-20","title":"Início do Outono","category":"comemorativa","suggestion":"Post sazonal sobre a chegada do outono.","notes":"Data aproximada do equinócio — conferir horário oficial."},
+  {"id":"2027-03-22","date":"2027-03-22","title":"Dia Mundial da Água","category":"comemorativa","suggestion":"Story educativo sobre a importância da água e dos recursos hídricos para a pesca.","notes":""},
+  {"id":"2027-03-26","date":"2027-03-26","title":"Paixão de Cristo (Sexta-feira Santa)","category":"feriado","suggestion":"Card de feriado religioso.","notes":""},
+  {"id":"2027-03-28","date":"2027-03-28","title":"Páscoa","category":"feriado","suggestion":"Mensagem de Páscoa para a categoria.","notes":""},
+  {"id":"2027-03-29","date":"2027-03-29","title":"Fim do defeso da Anchova","category":"defeso","suggestion":"O defeso da anchova termina dia 31/03 — safra reabre em 01/04.","notes":"Defeso em vigor desde 01/12/2026."},
+  {"id":"2027-04-01","date":"2027-04-01","title":"Início da safra da Anchova","category":"safra","suggestion":"Começou a safra da anchova!","notes":""},
+  {"id":"2027-04-21","date":"2027-04-21","title":"Tiradentes","category":"feriado","suggestion":"Card de feriado.","notes":""},
+  {"id":"2027-04-22","date":"2027-04-22","title":"Descobrimento do Brasil","category":"comemorativa","suggestion":"Post histórico/educativo.","notes":""},
+  {"id":"2027-04-28","date":"2027-04-28","title":"SINDIPI comemora 47 anos","category":"institucional","suggestion":"Publicação institucional: SINDIPI completa 47 anos.","notes":""},
+  {"id":"2027-04-28-2","date":"2027-04-28","title":"Dia Mundial da Segurança e Saúde no Trabalho","category":"institucional","suggestion":"Post sobre segurança no trabalho a bordo — EPIs e prevenção de acidentes na pesca.","notes":""},
+  {"id":"2027-04-29","date":"2027-04-29","title":"Fim do defeso do Camarão","category":"defeso","suggestion":"O defeso do camarão termina dia 30/04 — safra reabre em 01/05.","notes":""},
+  {"id":"2027-05-01","date":"2027-05-01","title":"Dia do Trabalhador","category":"feriado","suggestion":"Card de feriado — Dia do Trabalhador.","notes":""},
+  {"id":"2027-05-01-2","date":"2027-05-01","title":"Início da safra do Camarão","category":"safra","suggestion":"Começou a safra do camarão!","notes":""},
+  {"id":"2027-05-09","date":"2027-05-09","title":"Dia das Mães","category":"comemorativa","suggestion":"Post ou story especial para as mães da categoria.","notes":"2º domingo de maio."},
+  {"id":"2027-05-13","date":"2027-05-13","title":"Aviso: paralisação da frota de Emalhe (começa 15/05)","category":"defeso","suggestion":"Aviso: a paralisação da frota de emalhe começa dia 15/05.","notes":"Vai até 15/06."},
+  {"id":"2027-05-27","date":"2027-05-27","title":"Corpus Christi","category":"feriado","suggestion":"Card de feriado.","notes":""},
+  {"id":"2027-06-01","date":"2027-06-01","title":"Início da safra da Tainha","category":"safra","suggestion":"Começou a safra da tainha! — pauta de destaque do mês.","notes":"Temporada oficial vai até 31/07."},
+  {"id":"2027-06-05","date":"2027-06-05","title":"Dia Mundial do Meio Ambiente","category":"comemorativa","suggestion":"Post sobre preservação ambiental e pesca sustentável.","notes":""},
+  {"id":"2027-06-08","date":"2027-06-08","title":"Dia Mundial dos Oceanos","category":"comemorativa","suggestion":"Pauta de destaque: conscientização sobre a saúde dos oceanos e a pesca sustentável.","notes":""},
+  {"id":"2027-06-13","date":"2027-06-13","title":"Fim da paralisação da frota de Emalhe","category":"defeso","suggestion":"Retomada das atividades da frota de emalhe em 16/06.","notes":""},
+  {"id":"2027-06-15","date":"2027-06-15","title":"Aniversário de Itajaí","category":"comemorativa","suggestion":"Post de parabéns ao município de Itajaí.","notes":""},
+  {"id":"2027-06-15-2","date":"2027-06-15","title":"Início do defeso da Sardinha-verdadeira (isca-viva)","category":"defeso","suggestion":"Aviso: começa o defeso da sardinha-verdadeira como isca-viva, até 31/07.","notes":""},
+  {"id":"2027-06-21","date":"2027-06-21","title":"Início do Inverno","category":"comemorativa","suggestion":"Post sazonal sobre o início do inverno.","notes":"Data aproximada do solstício."},
+  {"id":"2027-06-29","date":"2027-06-29","title":"Dia do Pescador","category":"comemorativa","suggestion":"Homenagem à categoria — pauta especial do Dia do Pescador.","notes":""},
+  {"id":"2027-07-19","date":"2027-07-19","title":"Aniversário de Penha","category":"comemorativa","suggestion":"Post de parabéns ao município de Penha.","notes":""},
+  {"id":"2027-07-20","date":"2027-07-20","title":"Aniversário de Balneário Camboriú","category":"comemorativa","suggestion":"Post de parabéns a Balneário Camboriú.","notes":""},
+  {"id":"2027-07-29","date":"2027-07-29","title":"Reta final da safra da Tainha","category":"safra","suggestion":"Últimos dias da safra da tainha 2027 — encerra dia 31/07.","notes":""},
+  {"id":"2027-07-30","date":"2027-07-30","title":"Fim do defeso da Sardinha-verdadeira (isca-viva)","category":"defeso","suggestion":"Liberada a partir de 01/08 a captura da sardinha-verdadeira como isca-viva.","notes":""},
+  {"id":"2027-08-01","date":"2027-08-01","title":"Início do defeso: Badejo-amarelo, Sirigado, Garoupa-de-São Tomé e Caranha","category":"defeso","suggestion":"Aviso: começa o defeso do badejo-amarelo, sirigado, garoupa-de-são-tomé e caranha, até 30/09.","notes":""},
+  {"id":"2027-08-01-2","date":"2027-08-01","title":"Início da safra da Sardinha-verdadeira (isca-viva)","category":"safra","suggestion":"Liberada a captura da sardinha-verdadeira como isca-viva.","notes":""},
+  {"id":"2027-08-04","date":"2027-08-04","title":"Aniversário de Brusque","category":"comemorativa","suggestion":"Post de parabéns a Brusque.","notes":""},
+  {"id":"2027-08-08","date":"2027-08-08","title":"Dia dos Pais","category":"comemorativa","suggestion":"Post ou story especial para os pais da categoria.","notes":"2º domingo de agosto."},
+  {"id":"2027-08-26","date":"2027-08-26","title":"Aniversário de Navegantes","category":"comemorativa","suggestion":"Post de parabéns a Navegantes.","notes":""},
+  {"id":"2027-09-01","date":"2027-09-01","title":"Início do defeso: Cherne-verdadeiro e Peixe-batata","category":"defeso","suggestion":"Aviso: começa o defeso do cherne-verdadeiro e peixe-batata, até 31/10.","notes":""},
+  {"id":"2027-09-07","date":"2027-09-07","title":"Independência do Brasil","category":"feriado","suggestion":"Card de feriado cívico.","notes":""},
+  {"id":"2027-09-09","date":"2027-09-09","title":"Dia do Médico Veterinário","category":"comemorativa","suggestion":"Story sobre cuidado sanitário do pescado e parceria com médicos veterinários.","notes":""},
+  {"id":"2027-09-22","date":"2027-09-22","title":"Início da Primavera","category":"comemorativa","suggestion":"Post sazonal sobre a primavera.","notes":"Data aproximada do equinócio."},
+  {"id":"2027-09-28","date":"2027-09-28","title":"Fim do defeso: Badejo-amarelo, Sirigado, Garoupa-de-São Tomé e Caranha","category":"defeso","suggestion":"Anuncie o fim do defeso — safra reabre em 01/10.","notes":""},
+  {"id":"2027-10-01","date":"2027-10-01","title":"Novo ciclo do defeso da Sardinha-verdadeira (Cerco)","category":"defeso","suggestion":"Aviso: novo defeso da sardinha-verdadeira (cerco) até fevereiro/2028.","notes":""},
+  {"id":"2027-10-01-2","date":"2027-10-01","title":"Início da safra: Badejo-amarelo, Sirigado, Garoupa-de-São Tomé e Caranha","category":"safra","suggestion":"Reaberta a captura do badejo-amarelo, sirigado, garoupa-de-são-tomé e caranha.","notes":""},
+  {"id":"2027-10-04","date":"2027-10-04","title":"Dia Mundial dos Animais","category":"comemorativa","suggestion":"Post sobre bem-estar animal e fauna marinha.","notes":""},
+  {"id":"2027-10-12","date":"2027-10-12","title":"Nossa Senhora Aparecida","category":"feriado","suggestion":"Card de feriado.","notes":""},
+  {"id":"2027-10-13","date":"2027-10-13","title":"Aniversário de Porto Belo","category":"comemorativa","suggestion":"Post de parabéns a Porto Belo.","notes":""},
+  {"id":"2027-10-16","date":"2027-10-16","title":"Dia Mundial da Alimentação","category":"comemorativa","suggestion":"Post sobre o pescado como fonte de alimento saudável e sustentável.","notes":""},
+  {"id":"2027-10-29","date":"2027-10-29","title":"Fim do defeso: Cherne-verdadeiro e Peixe-batata","category":"defeso","suggestion":"Anuncie o fim do defeso — safra reabre em 01/11.","notes":""},
+  {"id":"2027-11-01","date":"2027-11-01","title":"Início da safra do Cherne-verdadeiro e Peixe-batata","category":"safra","suggestion":"Começou a safra do cherne-verdadeiro e peixe-batata!","notes":""},
+  {"id":"2027-11-02","date":"2027-11-02","title":"Finados","category":"feriado","suggestion":"Card de feriado.","notes":""},
+  {"id":"2027-11-15","date":"2027-11-15","title":"Proclamação da República","category":"feriado","suggestion":"Card de feriado.","notes":""},
+  {"id":"2027-11-20","date":"2027-11-20","title":"Dia Nacional de Zumbi e da Consciência Negra","category":"feriado","suggestion":"Post de reflexão sobre o Dia da Consciência Negra.","notes":""},
+  {"id":"2027-12-01","date":"2027-12-01","title":"Novo ciclo do defeso da Anchova","category":"defeso","suggestion":"Aviso: novo defeso da anchova até março/2028.","notes":""},
+  {"id":"2027-12-07","date":"2027-12-07","title":"Aniversário de Barra Velha","category":"comemorativa","suggestion":"Post de parabéns a Barra Velha.","notes":""},
+  {"id":"2027-12-14","date":"2027-12-14","title":"Aniversário de Piçarras","category":"comemorativa","suggestion":"Post de parabéns a Piçarras.","notes":""},
+  {"id":"2027-12-21","date":"2027-12-21","title":"Início do Verão","category":"comemorativa","suggestion":"Post sazonal sobre o início do verão.","notes":"Data aproximada do solstício."},
+  {"id":"2027-12-24","date":"2027-12-24","title":"Véspera de Natal","category":"institucional","suggestion":"Mensagem de Natal para a categoria.","notes":""},
+  {"id":"2027-12-25","date":"2027-12-25","title":"Natal","category":"feriado","suggestion":"Card de feriado.","notes":""},
+  {"id":"2027-12-31","date":"2027-12-31","title":"Véspera de Ano Novo","category":"institucional","suggestion":"Mensagem de Ano Novo para a categoria.","notes":""}
+];
+
+const WEEKDAY_FULL = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+const MONTHS = [
+  { key:'jan', num:'01', name:'Janeiro', start:5, days:31 },
+  { key:'fev', num:'02', name:'Fevereiro', start:1, days:28 },
+  { key:'mar', num:'03', name:'Março', start:1, days:31 },
+  { key:'abr', num:'04', name:'Abril', start:4, days:30 },
+  { key:'mai', num:'05', name:'Maio', start:6, days:31 },
+  { key:'jun', num:'06', name:'Junho', start:2, days:30 },
+  { key:'jul', num:'07', name:'Julho', start:4, days:31 },
+  { key:'ago', num:'08', name:'Agosto', start:0, days:31 },
+  { key:'set', num:'09', name:'Setembro', start:3, days:30 },
+  { key:'out', num:'10', name:'Outubro', start:5, days:31 },
+  { key:'nov', num:'11', name:'Novembro', start:1, days:30 },
+  { key:'dez', num:'12', name:'Dezembro', start:3, days:31 }
+];
+const DIAS = ['D','S','T','Q','Q','S','S'];
+
+function h(tag, attrs, ...children){
+  const e = document.createElement(tag);
+  attrs = attrs || {};
+  Object.entries(attrs).forEach(([k,v])=>{
+    if(k==='class') e.className = v;
+    else if(k.indexOf('on')===0 && typeof v==='function') e.addEventListener(k.slice(2), v);
+    else if(v!==undefined && v!==null) e.setAttribute(k, v);
+  });
+  children.flat().forEach(c=>{
+    if(c===null||c===undefined) return;
+    e.appendChild(typeof c==='string' ? document.createTextNode(c) : c);
+  });
+  return e;
+}
+function pad2(n){ return String(n).padStart(2,'0'); }
+function weekdayIndex(monthMeta, day){ return (monthMeta.start + day - 1) % 7; }
+
+const eventsByDate = new Map();
+POSTS.forEach(p=>{
+  if(!eventsByDate.has(p.date)) eventsByDate.set(p.date, []);
+  eventsByDate.get(p.date).push(p);
+});
+function eventsForDate(dateStr){ return eventsByDate.get(dateStr) || []; }
+function eventsForMonth(monthNum){
+  return POSTS.filter(p=> p.date.slice(5,7)===monthNum).sort((a,b)=> a.date.localeCompare(b.date));
+}
+
+function buildCalendars(){
+  const monthsEl = document.getElementById('months');
+  MONTHS.forEach(m=>{
+    const section = document.createElement('section');
+    section.className = 'month';
+    section.id = m.key;
+
+    const table = document.createElement('table');
+    table.className = 'cal';
+    const thead = h('thead', {}, h('tr', {}, ...DIAS.map((d,i)=> h('th', {class:i===0?'sun':''}, d))));
+    const tbody = document.createElement('tbody');
+
+    let cell = 0, tr = document.createElement('tr');
+    for(let i=0;i<m.start;i++){ tr.appendChild(h('td', {class:'empty'}, h('div', {class:'daycell'}))); cell++; }
+    for(let d=1; d<=m.days; d++){
+      const dateStr = '2027-' + m.num + '-' + pad2(d);
+      const events = eventsForDate(dateStr);
+      const wIdx = weekdayIndex(m, d);
+      const hasHoliday = events.some(ev=> ev.category==='feriado');
+      const titlesEl = h('div', {class:'titles'});
+      if(events.length===0){
+        titlesEl.appendChild(h('span', {class:'title-slot-empty'}));
+      } else {
+        events.slice(0,2).forEach(ev=> titlesEl.appendChild(h('span', {class:'title-chip cat-'+ev.category}, ev.title)));
+        if(events.length>2) titlesEl.appendChild(h('span', {class:'more-chip'}, '+'+(events.length-2)+' publicação(ões)'));
+      }
+      const dayCell = h('div', {
+        class: 'daycell' + (wIdx===0 || hasHoliday ? ' holiday':''),
+        tabindex:'0', role:'button', 'aria-label':'Dia '+d+' de '+m.name,
+        onclick: ()=> openDayModal(dateStr),
+        onkeydown: (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openDayModal(dateStr); } }
+      }, h('span',{class:'n'},String(d)), titlesEl);
+      const td = h('td', {}, dayCell);
+      tr.appendChild(td);
+      cell++;
+      if(cell % 7 === 0){ tbody.appendChild(tr); tr = document.createElement('tr'); }
+    }
+    if(cell % 7 !== 0){
+      while(cell % 7 !== 0){ tr.appendChild(h('td', {class:'empty'}, h('div', {class:'daycell'}))); cell++; }
+      tbody.appendChild(tr);
+    }
+    table.appendChild(thead); table.appendChild(tbody);
+
+    section.appendChild(h('div', {class:'month-head'},
+      h('span', {class:'month-num'}, m.num), h('h2', {}, m.name), h('span', {class:'yr'}, '· 2027')
+    ));
+
+    const monthEvents = eventsForMonth(m.num);
+    const fixed = monthEvents.filter(ev=> ev.category==='feriado'||ev.category==='comemorativa'||ev.category==='institucional');
+    const defsaf = monthEvents.filter(ev=> ev.category==='defeso'||ev.category==='safra');
+    const fixedList = h('ul', {class:'plain'},
+      ...(fixed.length ? fixed.map(ev=> h('li', {class: ev.category==='feriado'?'is-holiday':''}, h('span',{class:'d'}, ev.date.slice(8,10)), h('span',{class:'t'}, ev.title)))
+                        : [h('li',{class:'empty-note'},'Nenhuma data fixa registrada.')])
+    );
+    const defsafList = h('ul', {class:'plain'},
+      ...(defsaf.length ? defsaf.map(ev=> h('li', {}, h('span',{class:'d'}, ev.date.slice(8,10)), h('span',{}, ev.title)))
+                         : [h('li',{class:'empty-note'},'Nenhum defeso ou safra neste mês.')])
+    );
+    const sidePanel = h('div', {class:'side-panel'},
+      h('div', {class:'panel-block'}, h('h3',{},'Feriados e datas fixas'), fixedList),
+      h('div', {class:'panel-block'}, h('h3',{},'Defesos & safras'), defsafList)
+    );
+
+    section.appendChild(h('div', {class:'month-body'},
+      h('div', {},
+        table,
+        h('div', {class:'cal-legend'},
+          h('span', {class:'row'}, h('span',{class:'sq-holiday',style:'border-radius:50%'}), 'Domingo / feriado'),
+          h('span', {class:'row'}, h('span',{class:'dot comemorativa'}), 'Comemorativa'),
+          h('span', {class:'row'}, h('span',{class:'dot defeso'}), 'Defeso'),
+          h('span', {class:'row'}, h('span',{class:'dot safra'}), 'Safra'),
+          h('span', {class:'row'}, h('span',{class:'dot institucional'}), 'Institucional')
+        )
+      ),
+      sidePanel
+    ));
+    monthsEl.appendChild(section);
+  });
+}
+
+let currentModalDate = null;
+function openDayModal(dateStr){
+  currentModalDate = dateStr;
+  const [y,m,d] = dateStr.split('-').map(Number);
+  const meta = MONTHS[m-1];
+  const wIdx = weekdayIndex(meta, d);
+  document.getElementById('modalDate').textContent = WEEKDAY_FULL[wIdx] + ', ' + d + ' de ' + meta.name.toLowerCase();
+  const events = eventsForDate(dateStr);
+  document.getElementById('modalSub').textContent = events.length
+    ? (events.length===1 ? '1 publicação planejada' : events.length+' publicações planejadas')
+    : 'Nenhuma publicação planejada para este dia.';
+  const wrap = document.getElementById('modalEvents');
+  wrap.innerHTML = '';
+  if(events.length===0){
+    wrap.appendChild(h('p', {class:'empty-day'}, 'Espaço livre — ainda sem pauta definida.'));
+  } else {
+    events.forEach(ev=>{
+      const card = h('div', {class:'event-card'},
+        h('span', {class:'badge cat-'+ev.category}, CATEGORY_LABELS[ev.category]||ev.category),
+        h('h4', {}, ev.title),
+        h('p', {}, ev.suggestion || '')
+      );
+      if(ev.notes) card.appendChild(h('p', {class:'note'}, ev.notes));
+      wrap.appendChild(card);
+    });
+  }
+  document.getElementById('overlay').hidden = false;
+}
+function closeModal(){ document.getElementById('overlay').hidden = true; currentModalDate = null; }
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('overlay').addEventListener('click', (e)=>{ if(e.target.id==='overlay') closeModal(); });
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && !document.getElementById('overlay').hidden) closeModal(); });
+
+function setupScrollSpy(){
+  const links = [...document.querySelectorAll('#monthIndex a, #mobileNav a')];
+  const targets = MONTHS.map(m=>document.getElementById(m.key)).filter(Boolean);
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        const id = en.target.id;
+        links.forEach(a=> a.classList.toggle('active', a.getAttribute('href')==='#'+id));
+      }
+    });
+  }, { rootMargin:'-10% 0px -75% 0px', threshold:0 });
+  targets.forEach(t=> io.observe(t));
+}
+
+buildCalendars();
+setupScrollSpy();
+</script>
+</body>
+</html>
